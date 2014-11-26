@@ -54,19 +54,21 @@ lr.on('line', function (line) {
             $ = cheerio.load(body);
 
             var title = $("title").text();
-            var actors = $("#actorList").text();
-            actors = actors.replace(/<.*?>/, "").replace(/^\s+|\s+$/, "");
+            var actors = "";
+            $("#actorList ul a").each(function() {
+                if ($(this).text()!="...") actors += $(this).text() + ";";
+            });
 
-            fs.appendFile("data/films-data.txt", title+"\n");
-            fs.appendFileSync("data/films-data.txt", actors+"\n\n");
+            fs.appendFileSync("data/films-data.txt", "@@-@@"+title+"\n");
+            fs.appendFileSync("data/films-data.txt", "@@-@@"+actors+"\n\n");
 
         } else {
             console.log("Error fetching item page!                      ".error);
         }
         setTimeout(function() {
             //TEST MODE: ONLY FIRST LINK IS PARSED WHILE COMMENTED!!!
-              lr.close();
-//            lr.resume();
+//              lr.close();
+            lr.resume();
         }, 5000);
 
 
