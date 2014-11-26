@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^0.18.0",
     "colors": "^1.0.3",
     "encoding": "^0.1.11",
     "iconv-lite": "^0.4.5",
